@@ -23,4 +23,8 @@ public class carShowroom
     {
         this.carList = carList;
     }
+    public static void addCar(Car car)
+        {
+            carList.add(car);
+        }
 }

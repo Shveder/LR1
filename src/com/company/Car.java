@@ -7,6 +7,17 @@ public class Car
     private static String additionalFeatures;
     private static int cost;
 
+    public Car()
+    {
+    }
+    public Car(String carModel, int quaranteeMonth, String additionalFeatures, int cost)
+    {
+        this.carModel = carModel;
+        this.quaranteeMonth = quaranteeMonth;
+        this.additionalFeatures = additionalFeatures;
+        this.cost = cost;
+    }
+
     public static String getCarModel()
     {
         return carModel;
@@ -37,8 +48,9 @@ public class Car
     {
        Car.cost = cost;
     }
+
     @Override
     public String toString() {
-        return super.toString();
+        return "Car{}";
     }
 }
