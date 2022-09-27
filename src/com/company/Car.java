@@ -2,55 +2,60 @@ package com.company;
 
 public class Car
 {
-    private static String carModel;
-    private static int quaranteeMonth;
-    private static String additionalFeatures;
-    private static int cost;
+    private  String carModel;
+    private  int guaranteeMonth;
+    private  String additionalFeatures;
+    private  int cost;
 
     public Car()
     {
     }
-    public Car(String carModel, int quaranteeMonth, String additionalFeatures, int cost)
+    public Car(String carModel, int guaranteeMonth, String additionalFeatures, int cost)
     {
         this.carModel = carModel;
-        this.quaranteeMonth = quaranteeMonth;
+        this.guaranteeMonth = guaranteeMonth;
         this.additionalFeatures = additionalFeatures;
         this.cost = cost;
     }
 
-    public static String getCarModel()
+    public  String getCarModel()
     {
         return carModel;
     }
-    public static int getGuaranteeMonth()
+    public  int getGuaranteeMonth()
     {
-        return quaranteeMonth;
+        return guaranteeMonth;
     }
-    public static String getAdditionalFeatures() {
+    public  String getAdditionalFeatures() {
         return additionalFeatures;
     }
-    public static int getCost()
+    public  int getCost()
     {
         return cost;
     }
-    public static void setCarModel()
+    public  void setCarModel(String carModel)
     {
-        Car.carModel = carModel;
-    }
-    public static void setQuaranteeMonth()
-    {
-        Car.quaranteeMonth = quaranteeMonth;
-    }
-    public static void setAdditionalFeatures(String additionalFeatures) {
-        Car.additionalFeatures = additionalFeatures;
-    }
-    public static void setCost(int cost)
-    {
-       Car.cost = cost;
+        this.carModel = carModel;
     }
 
-    @Override
-    public String toString() {
-        return "Car{}";
+    public void setGuaranteeMonth(int guaranteeMonth) {
+        this.guaranteeMonth = guaranteeMonth;
+    }
+
+    public  void setAdditionalFeatures(String additionalFeatures) {
+        this.additionalFeatures = additionalFeatures;
+    }
+    public  void setCost(int cost)
+    {
+       this.cost = cost;
+    }
+
+    public  String toString() {
+        return "Car{" +
+                " Car model = " + carModel +
+                "/ guarantee month = " + guaranteeMonth +
+                "/ additional features = " + additionalFeatures +
+                "/ cost = " + cost + "$" +
+                "}";
     }
 }
