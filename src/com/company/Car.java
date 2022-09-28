@@ -42,7 +42,7 @@ public class Car
         this.guaranteeMonth = guaranteeMonth;
     }
 
-    public  void setAdditionalFeatures(String additionalFeatures) {
+    public void setAdditionalFeatures(String additionalFeatures) {
         this.additionalFeatures = additionalFeatures;
     }
     public  void setCost(int cost)

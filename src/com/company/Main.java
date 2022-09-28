@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -7,15 +8,14 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    interface Function<T1, T2, R>
-    {
+    interface Function<T1, T2, R> {
         R apply(T1 arg1, T2 arg2);
     }
-
 
     public static void main(String[] args) {
 
         carShowroom CarShowroom = new carShowroom();
+        List<Car> currentList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             int choise = 0;
@@ -41,22 +41,84 @@ public class Main {
                 case 5:
                     return;
                 case 6:
-                    CarShowroom.setList(filterByAdditionalFeatures(CarShowroom.getCarList()));
+                    currentList = CarShowroom.getCarList();
+                    while (true) {
+                        int choise2 = 0;
+                        System.out.println("1- +addF 2 - -addF 3 - <10k cost 4 - >10k cost 5 - <30m guar 6 - >30m guar  0-back");
+                        try {
+                            choise2 = Integer.parseInt(scanner.next());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input");
+                        }
+                        switch (choise2) {
+                            case 1:
+                                CarShowroom.setList(filterByAdditionalFeatures(CarShowroom.getCarList(), "yes"));
+                                break;
+                            case 2:
+                                CarShowroom.setList(filterByAdditionalFeatures(CarShowroom.getCarList(), "no"));
+                                break;
+                            case 3:
+                                CarShowroom.setList(filterByMinCost(CarShowroom.getCarList(), 10000));
+                                break;
+                            case 4:
+                                CarShowroom.setList(filterByMaxCost(CarShowroom.getCarList(), 10000));
+                                break;
+                            case 5:
+                                CarShowroom.setList(filterByMinGuarantee(CarShowroom.getCarList(), 30));
+                                break;
+                            case 6:
+                                CarShowroom.setList(filterByMaxGuarantee(CarShowroom.getCarList(), 30));
+                                break;
+                        }
+                        if(choise2==0)
+                            break;
+                    }
+                    break;
+                case 7:
+                    CarShowroom.setList(currentList);
                     break;
             }
         }
     }
 
-    public static List<Car> filterByAdditionalFeatures(List<Car>carList)
+    public static List<Car> filterByMinGuarantee(List<Car>carList,int guaranteeMonth)
     {
         return carList.stream()
-                .filter(car -> car.getCost() < 10000)
+                .filter(car -> car.getGuaranteeMonth() < guaranteeMonth)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Car> filterByMaxGuarantee(List<Car>carList,int guaranteeMonth)
+    {
+        return carList.stream()
+                .filter(car -> car.getGuaranteeMonth() > guaranteeMonth)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Car> filterByAdditionalFeatures(List<Car>carList,String string)
+    {
+        return carList.stream()
+                .filter(car -> car.getAdditionalFeatures().equals(string))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Car> filterByMinCost(List<Car>carList, int cost)
+    {
+        return carList.stream()
+                .filter(car -> car.getCost() < cost)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Car> filterByMaxCost(List<Car>carList, int cost)
+    {
+        return carList.stream()
+                .filter(car -> car.getCost() > cost)
                 .collect(Collectors.toList());
     }
 
     public static void printMenu() {
         System.out.println("-----------Menu------------");
-        System.out.println("\t 1 - View offers\n\t 2 - New Offer\n\t 3 - Buy car\n\t 4 - Change equipment\n\t 5 - Exit");
+        System.out.println("\t 1 - View offers\n\t 2 - New Offer\n\t 3 - Buy car\n\t 4 - Change equipment\n\t 5 - Exit\n\t 6 -Filter \n\t 7- return to default");
     }
 
     public static void viewOffers(carShowroom CarShowroom) {
@@ -106,7 +168,7 @@ public class Main {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input! Try Again");
             } catch (ValueErrorException e) {
-                System.out.println("Guarantee month value must be positive");
+                System.out.println("Cost value must be positive");
             }
         }
         Car car = new Car(carModel, guaranteeMonth, additionalFeatures, cost);
@@ -269,5 +331,19 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static int input_number(Scanner scanner)
+    {
+        int number;
+        while (true) {
+            try {
+                number = Integer.parseInt(scanner.next());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Try again");
+            }
+        }
+        return number;
     }
 }
