@@ -37,11 +37,9 @@ public class Car
     {
         this.carModel = carModel;
     }
-
     public void setGuaranteeMonth(int guaranteeMonth) {
         this.guaranteeMonth = guaranteeMonth;
     }
-
     public void setAdditionalFeatures(String additionalFeatures) {
         this.additionalFeatures = additionalFeatures;
     }

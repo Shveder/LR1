@@ -2,12 +2,10 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class carShowroom
 {
     private static List<Car>carList;
-
     public carShowroom(List<Car>carList)
     {
         this.carList = carList;
@@ -28,5 +26,4 @@ public class carShowroom
         {
             carList.add(car);
         }
-
 }

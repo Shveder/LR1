@@ -12,6 +12,8 @@ public class Main {
         R apply(T1 arg1, T2 arg2);
     }
 
+    interface
+
     public static void main(String[] args) {
 
         carShowroom CarShowroom = new carShowroom();
@@ -132,7 +134,7 @@ public class Main {
             if (i == 0)
                 throw new noCarException();
         } catch (noCarException e) {
-            e.printStackTrace();
+            System.out.println("!!");
         }
     }
 
@@ -267,9 +269,10 @@ public class Main {
                     System.out.println("Choose 0-2");
                 }
             }
+            Function<Integer ,Integer, Integer> function = (arg1, arg2) -> arg1 + arg2;
             switch (number1) {
                 case 1:
-                    CarShowroom.getCarList().get(choise - 1).setGuaranteeMonth(CarShowroom.getCarList().get(choise - 1).getGuaranteeMonth() + 6);
+                    CarShowroom.getCarList().get(choise - 1).setGuaranteeMonth(function.apply(CarShowroom.getCarList().get(choise-1).getGuaranteeMonth(),6));
                     CarShowroom.getCarList().get(choise - 1).setCost(CarShowroom.getCarList().get(choise - 1).getCost() + 200);
                     System.out.println("Succesfull!");
                     break;
