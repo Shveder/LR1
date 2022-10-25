@@ -14,13 +14,13 @@ public class carShowroom
     {
         carList = new ArrayList<>();
     }
-    public List<Car>getCarList()
+    public static List<Car>getCarList()
     {
         return carList;
     }
-    public void setList(List<Car>carList)
+    public static void setList(List<Car>carList1)
     {
-        this.carList = carList;
+        carList = carList1;
     }
     public static void addCar(Car car)
         {
