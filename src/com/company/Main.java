@@ -3,6 +3,7 @@ package com.company;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Main {
@@ -14,21 +15,18 @@ public class Main {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-//        hhh h1 =new hhh("H",true,1);
-//        hhh h2 =new hhh("Hh",true,2);
-//        hhh h3 =new hhh("Hhh",true,3);
-//        hhh h4 =new hhh("Hhhh",true,4);
-//        hhh h5 =new hhh("Hhhhh",true,5);
-//        List<hhh>H = new ArrayList<>();
-//        H.add(h1);
-//        H.add(h2);
-//        H.add(h3);
-//        H.add(h4);
-//        H.add(h5);
-//        Stream<hhh> HHH = Stream.of(h1,h2,h3,h4,h5);
-//
-//        hhh max = HHH.max(hhh::compare).get();
-//        System.out.println("Max="+max.toString());
+        Thr thr = new Thr();
+        thr.run(1,19);
+        Thread t  = new Thread(new Run());
+        t.start();
+
+
+
+
+
+
+
+
 
         UserList userList = new UserList();
         String fileName = "Users.txt";
@@ -75,7 +73,7 @@ public class Main {
                     createNewUser(userList, scanner);
                     break;
                 case 0:
-
+                    userList.writeDataToFile(fileName);
                     return;
             }
         }
@@ -107,7 +105,10 @@ public class Main {
                 case 5:
                     return;
                 case 6:
+                    currentList = carShowroom.getCarList();
                     filter(CarShowroom, scanner, currentList);
+                    carShowroom.setList(currentList);
+                    break;
                 case 8:
                     MyThread myThread = new MyThread();
                     myThread.start();
@@ -146,7 +147,10 @@ public class Main {
                 case 5:
                     return;
                 case 6:
+                    currentList = carShowroom.getCarList();
                     filter(CarShowroom, scanner, currentList);
+                    CarShowroom.setList(currentList);
+                    break;
                 case 7:
                     userMenu(userList, scanner);
                     break;
@@ -217,10 +221,20 @@ public class Main {
         int filteredByMinGuar = 0;
         while(true) {
             System.out.println("----Filter menu----");
-            System.out.println(" 1 - Filter \n 2 - Remove filter \n 3 - Buy car \n 4 - View offers \n 0 - Exit");
+            System.out.println(" 1 - Filter \n 2 - Remove filter \n 3 - Buy car \n 4 - View offers \n 5 -sort\n 0 - Exit");
             int choice4 = 0;
             int choice2 = 0;
             choice4 = input_number(scanner);
+            if(choice4==5)
+            {
+                MyThread myThread = new MyThread();
+                myThread.start();
+            }
+            if(choice4==6)
+            {
+                Thread thread = new Thread(new Runner());
+                thread.start();
+            }
             if (choice4 == 1)
                 while (true) {
                     System.out.print(" 1- Filter by addF \n 3 - Filter by minCost \n 4 - filter By maxCost \n 5 - filter by minGuar \n 6 - filter by maxGuar \n 0 - Exit ");
@@ -318,9 +332,10 @@ public class Main {
             if(choice4 == 4)
                 viewOffers(CarShowroom);
             if (choice4 == 0)
+
                 break;
         }
-        carShowroom.setList(currentList);
+
     }
 
     private static void createNewUser(UserList userlist, Scanner scanner){

@@ -26,10 +26,7 @@ public class hhh {
 
     @Override
     public String toString() {
-        return "hhh{" +
-                "a='" + a + '\'' +
-                ", b=" + b +
-                ", c=" + c +
-                '}';
+        return
+                "a='" + a ;
     }
 }
